@@ -10,7 +10,9 @@ using Windows.Security.Credentials;
 using Windows.Storage;
 using Newtonsoft.Json;
 
-namespace GitterApp.Platform
+using GitterApp.Services;
+
+namespace GitterApp.Platform.Services
 {
 	public class GitterLoginService : GitterLoginServiceBase
 	{
@@ -53,6 +55,11 @@ namespace GitterApp.Platform
 				User = user,
 				Token = token
 			};
+		}
+
+		public override Task LogoutAsync()
+		{
+			throw new NotImplementedException();
 		}
 
 		private async Task<string> GetNewTokenAsync()

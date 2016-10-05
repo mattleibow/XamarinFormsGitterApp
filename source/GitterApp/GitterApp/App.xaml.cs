@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-
-using Xamarin.Forms;
+﻿using Xamarin.Forms;
 
 namespace GitterApp
 {
@@ -14,7 +8,7 @@ namespace GitterApp
 		{
 			InitializeComponent();
 
-			MainPage = new GitterApp.MainPage();
+			MainPage = new MainPage();
 		}
 
 		protected override void OnStart()

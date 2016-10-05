@@ -1,12 +1,14 @@
 ﻿using System.Threading.Tasks;
 
-namespace GitterApp
+namespace GitterApp.Services
 {
 	public interface IGitterLoginService
 	{
 		Task<GitterUser> GetLastUserAsync();
 
 		Task<LoginResult> LoginAsync();
+
+		Task LogoutAsync();
 	}
 
 	public abstract class GitterLoginServiceBase : IGitterLoginService
@@ -29,6 +31,8 @@ namespace GitterApp
 		public abstract Task<GitterUser> GetLastUserAsync();
 
 		public abstract Task<LoginResult> LoginAsync();
+
+		public abstract Task LogoutAsync();
 	}
 
 	public class LoginResult

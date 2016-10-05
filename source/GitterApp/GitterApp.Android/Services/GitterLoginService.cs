@@ -1,10 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace GitterApp.Platform
+using GitterApp.Services;
+
+namespace GitterApp.Platform.Services
 {
 	public class GitterLoginService : GitterLoginServiceBase
 	{
@@ -14,6 +13,11 @@ namespace GitterApp.Platform
 		}
 
 		public override Task<LoginResult> LoginAsync()
+		{
+			throw new NotImplementedException();
+		}
+
+		public override Task LogoutAsync()
 		{
 			throw new NotImplementedException();
 		}
