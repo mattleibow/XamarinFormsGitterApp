@@ -1,0 +1,12 @@
+﻿namespace GitterApp.Platform
+{
+	public sealed partial class MainPage
+	{
+		public MainPage()
+		{
+			this.InitializeComponent();
+
+			LoadApplication(new GitterApp.App());
+		}
+	}
+}
