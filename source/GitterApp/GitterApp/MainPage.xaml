@@ -3,10 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:local="clr-namespace:GitterApp"
              x:Class="GitterApp.MainPage">
+  <StackLayout>
 
-  <Button Text="Login"
-          VerticalOptions="Center"
-          HorizontalOptions="Center"
-          Clicked="OnLoginCLicked" />
+    <Button Text="Login"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            Clicked="OnLoginCLicked" />
 
+    <Button Text="Logout"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            Clicked="OnLogoutCLicked" />
+
+  </StackLayout>
 </ContentPage>

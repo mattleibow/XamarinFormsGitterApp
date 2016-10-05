@@ -18,9 +18,13 @@ namespace GitterApp.Platform.Services
 	{
 		public override Task<GitterUser> GetLastUserAsync()
 		{
-			object userJson;
+			object userJson = null;
 			var settings = ApplicationData.Current.RoamingSettings;
-			settings.Values.TryGetValue(SettingsUserNameKey, out userJson);
+			ApplicationDataContainer container;
+			if (settings.Containers.TryGetValue(SettingsResourceKey, out container))
+			{
+				container.Values.TryGetValue(SettingsUserNameKey, out userJson);
+			}
 
 			var json = userJson as string;
 			if (json == null)
@@ -59,7 +63,20 @@ namespace GitterApp.Platform.Services
 
 		public override Task LogoutAsync()
 		{
-			throw new NotImplementedException();
+			var settings = ApplicationData.Current.RoamingSettings;
+			settings.DeleteContainer(SettingsResourceKey);
+
+			try
+			{
+				var vault = new PasswordVault();
+				var credential = vault.Retrieve(SettingsResourceKey, SettingsUserNameKey);
+				vault.Remove(credential);
+			}
+			catch
+			{
+			}
+
+			return Task.FromResult(true);
 		}
 
 		private async Task<string> GetNewTokenAsync()
@@ -179,6 +196,7 @@ namespace GitterApp.Platform.Services
 				var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
 
 				var settings = ApplicationData.Current.RoamingSettings;
+				var container = settings.CreateContainer(SettingsResourceKey, ApplicationDataCreateDisposition.Always);
 				settings.Values[SettingsUserNameKey] = json;
 
 				return JsonConvert.DeserializeObject<GitterUser>(json);
