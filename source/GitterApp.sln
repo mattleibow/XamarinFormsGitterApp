@@ -3,17 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
 VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitterApp", "GitterApp\GitterApp\GitterApp.csproj", "{9E46309B-0CAA-4136-96B7-AB11D485FA3E}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitterApp", "GitterApp\GitterApp.csproj", "{9E46309B-0CAA-4136-96B7-AB11D485FA3E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitterApp.Android", "GitterApp\GitterApp.Android\GitterApp.Android.csproj", "{0D20E85F-301E-426B-964C-47A8485E91F2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitterApp.Android", "GitterApp.Android\GitterApp.Android.csproj", "{0D20E85F-301E-426B-964C-47A8485E91F2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitterApp.iOS", "GitterApp\GitterApp.iOS\GitterApp.iOS.csproj", "{89527B2C-9633-417B-B7F0-41191C9C3B20}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitterApp.iOS", "GitterApp.iOS\GitterApp.iOS.csproj", "{89527B2C-9633-417B-B7F0-41191C9C3B20}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitterApp.WinPhone", "GitterApp\GitterApp.WinPhone\GitterApp.WinPhone.csproj", "{70DE9168-F573-4EC6-8CEC-9CF852871713}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitterApp.WinPhone", "GitterApp.WinPhone\GitterApp.WinPhone.csproj", "{70DE9168-F573-4EC6-8CEC-9CF852871713}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitterApp.UWP", "GitterApp\GitterApp.UWP\GitterApp.UWP.csproj", "{1BD59C17-2CF6-49FA-BCAD-65B861B41E2D}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitterApp.UWP", "GitterApp.UWP\GitterApp.UWP.csproj", "{1BD59C17-2CF6-49FA-BCAD-65B861B41E2D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitterApp.Windows", "GitterApp\GitterApp.Windows\GitterApp.Windows.csproj", "{0809C870-6976-4148-935D-2817ED5FAF40}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitterApp.Windows", "GitterApp.Windows\GitterApp.Windows.csproj", "{0809C870-6976-4148-935D-2817ED5FAF40}"
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "GitterApp.Localization", "GitterApp.Localization\GitterApp.Localization.shproj", "{0BA6873F-A876-4044-8A90-27A39806CE4B}"
 EndProject
