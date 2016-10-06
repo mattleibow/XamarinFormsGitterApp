@@ -4,7 +4,10 @@
              x:Class="GitterApp.App">
   <Application.Resources>
 
-    <!-- Application resource dictionary -->
+    <ResourceDictionary>
+      <Color x:Key="GitterBackgroundColor">#512e92</Color>
+      <OnPlatform x:Key="GitterBackgroundImage" x:TypeArguments="ImageSource" WinPhone="Media/banner.jpg" iOS="Media/banner.jpg" Android="banner.jpg" />
+    </ResourceDictionary>
 
   </Application.Resources>
 </Application>

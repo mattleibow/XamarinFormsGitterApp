@@ -6,52 +6,57 @@ using GitterApp.Services;
 
 namespace GitterApp
 {
-	public partial class MainPage : ContentPage
+	public partial class MainPage : MasterDetailPage
 	{
 		public MainPage()
 		{
 			InitializeComponent();
+
+			BindingContext = this;
+
+			Master = new MasterPage();
+			Detail = new DetailsPage(new ChatPage());
 		}
 
-		private async void OnLoginCLicked(object sender, EventArgs e)
-		{
-			Debug.WriteLine("Logging in...");
+		//private async void OnLoginCLicked(object sender, EventArgs e)
+		//{
+		//	Debug.WriteLine("Logging in...");
 
-			var service = DependencyService.Get<IGitterLoginService>();
+		//	var service = DependencyService.Get<IGitterLoginService>();
 
-			var user = await service.GetLastUserAsync();
-			if (user != null)
-			{
-				Debug.WriteLine($"Last user: {user.DisplayName}.");
-			}
+		//	var user = await service.GetLastUserAsync();
+		//	if (user != null)
+		//	{
+		//		Debug.WriteLine($"Last user: {user.DisplayName}.");
+		//	}
 
-			var result = await service.LoginAsync();
+		//	var result = await service.LoginAsync();
 
-			if (result.User == null)
-			{
-				Debug.WriteLine($"Log in cancelled.");
-			}
-			else
-			{
-				Debug.WriteLine($"Logged in: {result.User.DisplayName}.");
-			}
-		}
+		//	if (result.User == null)
+		//	{
+		//		Debug.WriteLine($"Log in cancelled.");
+		//	}
+		//	else
+		//	{
+		//		Debug.WriteLine($"Logged in: {result.User.DisplayName}.");
+		//	}
+		//}
 
-		private async void OnLogoutCLicked(object sender, EventArgs e)
-		{
-			Debug.WriteLine("Logging out...");
+		//private async void OnLogoutCLicked(object sender, EventArgs e)
+		//{
+		//	Debug.WriteLine("Logging out...");
 
-			var service = DependencyService.Get<IGitterLoginService>();
+		//	var service = DependencyService.Get<IGitterLoginService>();
 
-			var user = await service.GetLastUserAsync();
-			if (user != null)
-			{
-				Debug.WriteLine($"Last user: {user.DisplayName}.");
-			}
+		//	var user = await service.GetLastUserAsync();
+		//	if (user != null)
+		//	{
+		//		Debug.WriteLine($"Last user: {user.DisplayName}.");
+		//	}
 
-			await service.LogoutAsync();
+		//	await service.LogoutAsync();
 
-			Debug.WriteLine($"Logged out.");
-		}
+		//	Debug.WriteLine($"Logged out.");
+		//}
 	}
 }

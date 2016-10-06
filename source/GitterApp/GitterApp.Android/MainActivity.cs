@@ -16,6 +16,8 @@ namespace GitterApp.Platform
 
 			base.OnCreate(bundle);
 
+			Localization.UpdateCulture();
+
 			Xamarin.Forms.Forms.Init(this, bundle);
 			Xamarin.Forms.DependencyService.Register<GitterLoginService>();
 

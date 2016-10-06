@@ -20,6 +20,8 @@ namespace GitterApp.Platform
 		//
 		public override bool FinishedLaunching(UIApplication app, NSDictionary options)
 		{
+			Localization.UpdateCulture();
+
 			Xamarin.Forms.Forms.Init();
 			Xamarin.Forms.DependencyService.Register<GitterLoginService>();
 
