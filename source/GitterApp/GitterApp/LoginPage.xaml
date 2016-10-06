@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="GitterApp.LoginPage" BackgroundColor="{StaticResource GitterBackgroundColor}"
+             xmlns:i18n="clr-namespace:GitterApp;assembly=GitterApp">
+  <Grid>
+
+    <Image Source="{StaticResource GitterBackgroundImage}" Aspect="AspectFill" />
+
+    <StackLayout VerticalOptions="Center" HorizontalOptions="Center" >
+
+      <StackLayout Orientation="Horizontal" HeightRequest="24" HorizontalOptions="Center">
+        <AbsoluteLayout x:Name="logo" WidthRequest="20" HeightRequest="24">
+          <BoxView x:Name="leftArm" Color="White" AbsoluteLayout.LayoutBounds="0,0,2,15" />
+          <BoxView x:Name="leftBody" Color="White" AbsoluteLayout.LayoutBounds="5,4,2,20" />
+          <BoxView x:Name="rightBody" Color="White" AbsoluteLayout.LayoutBounds="10,4,2,20" />
+          <BoxView x:Name="rightArm" Color="White" AbsoluteLayout.LayoutBounds="15,0,2,11" />
+        </AbsoluteLayout>
+        <Label x:Name="logoText" Text="GITTER" 
+               Margin="20,0,0,0" HeightRequest="24" VerticalTextAlignment="Center" 
+               FontAttributes="Bold" Opacity="0" TextColor="White" />
+      </StackLayout>
+
+      <Label Text="Where developers come to talk." 
+             HorizontalTextAlignment="Center" Margin="0,35,0,25" 
+             FontSize="28" FontAttributes="Bold" TextColor="White" />
+
+      <Button Text="{i18n:Translate LoginButtonText}"
+              HeightRequest="50" HorizontalOptions="Center"
+              BackgroundColor="#45cba1" TextColor="White" FontAttributes="Bold"
+              BorderWidth="0" BorderRadius="6" />
+
+    </StackLayout>
+
+  </Grid>
+
+</ContentPage>
