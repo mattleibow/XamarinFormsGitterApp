@@ -17,46 +17,5 @@ namespace GitterApp
 			Master = new MasterPage();
 			Detail = new DetailsPage(new ChatPage());
 		}
-
-		//private async void OnLoginCLicked(object sender, EventArgs e)
-		//{
-		//	Debug.WriteLine("Logging in...");
-
-		//	var service = DependencyService.Get<IGitterLoginService>();
-
-		//	var user = await service.GetLastUserAsync();
-		//	if (user != null)
-		//	{
-		//		Debug.WriteLine($"Last user: {user.DisplayName}.");
-		//	}
-
-		//	var result = await service.LoginAsync();
-
-		//	if (result.User == null)
-		//	{
-		//		Debug.WriteLine($"Log in cancelled.");
-		//	}
-		//	else
-		//	{
-		//		Debug.WriteLine($"Logged in: {result.User.DisplayName}.");
-		//	}
-		//}
-
-		//private async void OnLogoutCLicked(object sender, EventArgs e)
-		//{
-		//	Debug.WriteLine("Logging out...");
-
-		//	var service = DependencyService.Get<IGitterLoginService>();
-
-		//	var user = await service.GetLastUserAsync();
-		//	if (user != null)
-		//	{
-		//		Debug.WriteLine($"Last user: {user.DisplayName}.");
-		//	}
-
-		//	await service.LogoutAsync();
-
-		//	Debug.WriteLine($"Logged out.");
-		//}
 	}
 }

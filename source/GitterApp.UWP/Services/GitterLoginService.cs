@@ -1,9 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Net;
-using System.Net.Http;
-using System.Net.Http.Headers;
 using System.Threading.Tasks;
 using Windows.Security.Authentication.Web;
 using Windows.Security.Credentials;
@@ -14,7 +10,7 @@ using GitterApp.Services;
 
 namespace GitterApp.Platform.Services
 {
-	public class GitterLoginService : GitterLoginServiceBase
+	public class GitterLoginService1 : GitterLoginServiceBase
 	{
 		public override Task<GitterUser> GetLastUserAsync()
 		{
@@ -35,32 +31,6 @@ namespace GitterApp.Platform.Services
 			return Task.FromResult(JsonConvert.DeserializeObject<GitterUser>(json));
 		}
 
-		public override async Task<LoginResult> LoginAsync()
-		{
-			GitterUser user = null;
-
-			// try and load an existing token
-			var token = GetLocalToken();
-			if (token != null)
-			{
-				user = await GetUserAsync(token);
-			}
-
-			// either expired, or not logged in
-			if (user == null)
-			{
-				token = await GetNewTokenAsync();
-				user = await GetUserAsync(token);
-			}
-
-			// return the info to the caller
-			return new LoginResult
-			{
-				User = user,
-				Token = token
-			};
-		}
-
 		public override Task LogoutAsync()
 		{
 			var settings = ApplicationData.Current.RoamingSettings;
@@ -79,28 +49,24 @@ namespace GitterApp.Platform.Services
 			return Task.FromResult(true);
 		}
 
-		private async Task<string> GetNewTokenAsync()
+		protected override Task SaveUser(GitterUser user)
 		{
-			Debug.WriteLine("GitterLoginService: Fetching new token.");
+			var settings = ApplicationData.Current.RoamingSettings;
+			var container = settings.CreateContainer(SettingsResourceKey, ApplicationDataCreateDisposition.Always);
+			settings.Values[SettingsUserNameKey] = JsonConvert.SerializeObject(user);
 
-			// get the token
-			var code = await GetAuthCodeAsync().ConfigureAwait(false);
-			var result = await GetAuthTokenAsync(code).ConfigureAwait(false);
-			if (result == null)
-			{
-				// the user has cancelled
-				return null;
-			}
-
-			// save the token
-			var settings = new PasswordVault();
-			settings.Add(new PasswordCredential(SettingsResourceKey, SettingsUserNameKey, result.AccessToken));
-
-			// return the token
-			return result.AccessToken;
+			return Task.FromResult(true);
 		}
 
-		private string GetLocalToken()
+		protected override Task SaveLocalToken(string token)
+		{
+			var settings = new PasswordVault();
+			settings.Add(new PasswordCredential(SettingsResourceKey, SettingsUserNameKey, token));
+
+			return Task.FromResult(true);
+		}
+
+		protected override Task<string> GetLocalToken()
 		{
 			Debug.WriteLine("GitterLoginService: Retrieving saved token.");
 
@@ -117,10 +83,10 @@ namespace GitterApp.Platform.Services
 			{
 				token = null;
 			}
-			return token;
+			return Task.FromResult(token);
 		}
 
-		private async Task<string> GetAuthCodeAsync()
+		protected override Task<string> GetAuthCodeAsync()
 		{
 			var url =
 				$"{AuthorizeUrl}" +
@@ -137,82 +103,6 @@ namespace GitterApp.Platform.Services
 			}
 
 			return null;
-		}
-
-		private async Task<GitterTokenResult> GetAuthTokenAsync(string code)
-		{
-			if (string.IsNullOrWhiteSpace(code))
-			{
-				return null;
-			}
-
-			using (var httpClient = new HttpClient())
-			{
-				var content = new FormUrlEncodedContent(new Dictionary<string, string> {
-					{ "code", code},
-					{ "client_id", ClientId},
-					{ "client_secret", ClientSecret},
-					{ "redirect_uri", RedirectUrl},
-					{ "grant_type", "authorization_code"},
-				});
-
-				var response = await httpClient.PostAsync(new Uri(AccessTokenUrl), content).ConfigureAwait(false);
-				var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-				return JsonConvert.DeserializeObject<GitterTokenResult>(json);
-			}
-		}
-
-		private async Task<GitterUser> GetUserAsync(string token)
-		{
-			if (string.IsNullOrWhiteSpace(token))
-			{
-				return null;
-			}
-
-			Debug.WriteLine("GitterLoginService: Retrieving user profile.");
-
-			using (var httpClient = new HttpClient())
-			{
-				httpClient.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
-				httpClient.DefaultRequestHeaders.Accept.ParseAdd("application/json");
-
-				var response = await httpClient.GetAsync(GitterCurrentUserUrl).ConfigureAwait(false);
-
-				if (!response.IsSuccessStatusCode)
-				{
-					if (response.StatusCode == HttpStatusCode.Unauthorized)
-					{
-						// may have expired
-					}
-					else
-					{
-						// some other error
-					}
-
-					return null;
-				}
-
-				// everything is fine
-				var json = await response.Content.ReadAsStringAsync().ConfigureAwait(false);
-
-				var settings = ApplicationData.Current.RoamingSettings;
-				var container = settings.CreateContainer(SettingsResourceKey, ApplicationDataCreateDisposition.Always);
-				settings.Values[SettingsUserNameKey] = json;
-
-				return JsonConvert.DeserializeObject<GitterUser>(json);
-			}
-		}
-
-		private class GitterTokenResult
-		{
-			[JsonProperty("access_token")]
-			public string AccessToken { get; set; }
-
-			[JsonProperty("expires_in")]
-			public string ExpiresIn { get; set; }
-
-			[JsonProperty("token_type")]
-			public string TokenType { get; set; }
 		}
 	}
 }

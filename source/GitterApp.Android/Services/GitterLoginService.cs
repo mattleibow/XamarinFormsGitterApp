@@ -12,12 +12,27 @@ namespace GitterApp.Platform.Services
 			throw new NotImplementedException();
 		}
 
-		public override Task<LoginResult> LoginAsync()
+		public override Task LogoutAsync()
 		{
 			throw new NotImplementedException();
 		}
 
-		public override Task LogoutAsync()
+		protected override Task<string> GetAuthCodeAsync()
+		{
+			throw new NotImplementedException();
+		}
+
+		protected override Task<string> GetLocalToken()
+		{
+			throw new NotImplementedException();
+		}
+
+		protected override Task SaveLocalToken(string token)
+		{
+			throw new NotImplementedException();
+		}
+
+		protected override Task SaveUser(GitterUser user)
 		{
 			throw new NotImplementedException();
 		}

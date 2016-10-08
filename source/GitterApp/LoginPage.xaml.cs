@@ -1,28 +1,30 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Diagnostics;
 using System.Threading.Tasks;
-
+using System.Windows.Input;
+using GitterApp.Services;
 using Xamarin.Forms;
 
 namespace GitterApp
 {
 	public partial class LoginPage : ContentPage
-	{
+	{		private ICommand loginCommand;
+
 		public LoginPage()
 		{
 			InitializeComponent();
+
+			BindingContext = this;
 		}
 
-		protected override async void OnAppearing()
+		protected override void OnAppearing()
 		{
 			base.OnAppearing();
 
-			await AnimateLogoIn();
+			AnimateLogoIn();
 		}
 
-		public event EventHandler LoggedIn;
+		public ICommand LogInCommand => (loginCommand ?? (loginCommand = new Command(OnLogIn)));
 
 		private async Task AnimateLogoIn()
 		{
@@ -59,5 +61,45 @@ namespace GitterApp
 			await logoText.FadeTo(1, 1000);
 		}
 
+		private async void OnLogIn()
+		{
+			Debug.WriteLine("Logging in...");
+
+			var service = DependencyService.Get<IGitterLoginService>();
+
+			var user = await service.GetLastUserAsync();
+			if (user != null)
+			{
+				Debug.WriteLine($"Last user: {user.DisplayName}.");
+			}
+
+			var result = await service.LoginAsync();
+
+			if (result.User == null)
+			{
+				Debug.WriteLine($"Log in cancelled.");
+			}
+			else
+			{
+				MessagingCenter.Send(App.CurrentApp, Messages.LoggedIn, result.User);
+			}
+		}
+
+		private async void OnLogoutCLicked(object sender, EventArgs e)
+		{
+			Debug.WriteLine("Logging out...");
+
+			var service = DependencyService.Get<IGitterLoginService>();
+
+			var user = await service.GetLastUserAsync();
+			if (user != null)
+			{
+				Debug.WriteLine($"Last user: {user.DisplayName}.");
+			}
+
+			await service.LogoutAsync();
+
+			Debug.WriteLine($"Logged out.");
+		}
 	}
 }

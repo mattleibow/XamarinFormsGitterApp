@@ -118,6 +118,12 @@
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
   <data name="LoginButtonText" xml:space="preserve">
-    <value>&amp;#x2063;     SIGN IN TO START TALKING     &amp;#x2063;</value>
+    <value>     SIGN IN TO START TALKING     </value>
+  </data>
+  <data name="TaglineText" xml:space="preserve">
+    <value>Where developers come to talk.</value>
+  </data>
+  <data name="LogoNameText" xml:space="preserve">
+    <value>G I T T E R</value>
   </data>
 </root>
