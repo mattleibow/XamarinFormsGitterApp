@@ -2,6 +2,7 @@
 using UIKit;
 
 using GitterApp.Platform.Services;
+using System;
 
 namespace GitterApp.Platform
 {
@@ -15,9 +16,16 @@ namespace GitterApp.Platform
 			Xamarin.Forms.Forms.Init();
 			Xamarin.Forms.DependencyService.Register<GitterLoginService>();
 
+			Xamarin.Forms.MessagingCenter.Subscribe<App, bool>(this, Messages.ToggleMenu, OnToggleMenu);
+
 			LoadApplication(new App());
 
 			return base.FinishedLaunching(app, options);
+		}
+
+		private void OnToggleMenu(App app, bool presented)
+		{
+			UIApplication.SharedApplication.SetStatusBarHidden(presented, UIStatusBarAnimation.Slide);
 		}
 
 		public override bool OpenUrl(UIApplication application, NSUrl url, string sourceApplication, NSObject annotation)

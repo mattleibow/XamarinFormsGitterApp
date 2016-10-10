@@ -1,39 +1,97 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="GitterApp.MasterPage" Title="Gitter.im">
+             xmlns:views="clr-namespace:GitterApp.Views;assembly=GitterApp"
+             x:Class="GitterApp.MasterPage"
+             Title="Gitter.im" BackgroundColor="{StaticResource GitterBackgroundColor}">
   <ContentPage.Icon>
     <OnPlatform x:TypeArguments="FileImageSource" iOS="hamburger.png" />
   </ContentPage.Icon>
-  <StackLayout Padding="0" Spacing="0">
-    <ContentView BackgroundColor="#2c3e50" Margin="0">
-      <ContentView.Padding>
-        <OnPlatform x:TypeArguments="Thickness" WinPhone="12,36,12,12" iOS="12,72,12,12" Android="12,72,12,12" />
-      </ContentView.Padding>
-      <Label Text="Gitter.im" FontSize="Large" TextColor="White" />
-    </ContentView>
-    <BoxView Color="#3498db" HorizontalOptions="Fill" Margin="0" HeightRequest="3" />
+
+  <Grid Padding="0" Margin="0" RowSpacing="0" ColumnSpacing="0">
+    <Grid.RowDefinitions>
+      <RowDefinition Height="{StaticResource MainHeaderHeight}" />
+      <RowDefinition Height="*" />
+      <RowDefinition Height="{StaticResource MainHeaderHeight}" />
+    </Grid.RowDefinitions>
+    
+    <Image Source="{StaticResource GitterMenuImage}" Aspect="AspectFill" Grid.RowSpan="3" />
+
+    <!-- header -->
+
+    <Grid Padding="0" Margin="0" RowSpacing="0" ColumnSpacing="0" 
+          BackgroundColor="{StaticResource MainHeaderOverlayColor}" >
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="*" />
+      </Grid.ColumnDefinitions>
+
+      <!-- logo -->
+      <AbsoluteLayout WidthRequest="24" HeightRequest="24" Padding="12,0,0,0"
+                      HorizontalOptions="Center" VerticalOptions="Center">
+        <BoxView Color="White" AbsoluteLayout.LayoutBounds="4,0,2,15" />
+        <BoxView Color="White" AbsoluteLayout.LayoutBounds="9,4,2,20" />
+        <BoxView Color="White" AbsoluteLayout.LayoutBounds="14,4,2,20" />
+        <BoxView Color="White" AbsoluteLayout.LayoutBounds="19,4,2,11" />
+      </AbsoluteLayout>
+
+      <!-- search -->
+      <SearchBar BackgroundColor="Transparent" Placeholder="Jump to conversation..."
+                 Grid.Column="1" Text="{Binding SearchText}" />
+    </Grid>
+
+    <!-- rooms -->
+
     <ListView ItemsSource="{Binding ChatRooms}" SelectedItem="{Binding CurrentChatRoom}"
-              CachingStrategy="RecycleElement" IsGroupingEnabled="True"
-              SeparatorVisibility="None">
+              IsGroupingEnabled="True" RowHeight="38"
+              SeparatorVisibility="None" SeparatorColor="Transparent" BackgroundColor="Transparent"
+              Grid.Row="1">
       <ListView.GroupHeaderTemplate>
         <DataTemplate>
           <ViewCell>
-            <Grid Padding="5,20,5,5" Margin="0">
-              <Label Text="{Binding Name}" FontAttributes="Bold" FontSize="Micro" />
+            <Grid Padding="0" Margin="0,0,0,-1" BackgroundColor="{StaticResource GitterBackgroundColor}">
+              <Grid Padding="0" Margin="0" BackgroundColor="{StaticResource MainHeaderOverlayColor}" />
+              <Label Text="{Binding Name}" Opacity="0.6" 
+                     TextColor="{StaticResource GitterForegroundColor}" FontAttributes="Bold" FontSize="Micro"
+                     VerticalOptions="Center" HorizontalOptions="Start" Margin="12" />
             </Grid>
           </ViewCell>
         </DataTemplate>
       </ListView.GroupHeaderTemplate>
       <ListView.ItemTemplate>
         <DataTemplate>
-          <ViewCell>
-            <Grid Padding="35,5,5,5">
-              <Label Text="{Binding Name}" FontSize="Small" />
+          <views:SelectionViewCell SelectionColor="{StaticResource SelectedOverlayColor}">
+            <Grid Padding="0" Margin="0" Opacity="{Binding HasUnread, Converter={StaticResource BoolAlphaConverter}, ConverterParameter=0.6}">
+              <Label Text="{Binding Type, Converter={StaticResource RoomTypeConverter}}" 
+                     FontSize="Small" FontAttributes="{Binding HasUnread, Converter={StaticResource BoolBoldConverter}}" 
+                     HorizontalTextAlignment="Center" TextColor="{StaticResource GitterForegroundColor}"
+                     VerticalTextAlignment="Center" HorizontalOptions="Start" WidthRequest="30" Margin="6,0,0,0" />
+              <Label Text="{Binding Name}" FontSize="Small" TextColor="{StaticResource GitterForegroundColor}"
+                     FontAttributes="{Binding HasUnread, Converter={StaticResource BoolBoldConverter}}" 
+                     LineBreakMode="TailTruncation" VerticalTextAlignment="Center" Margin="36,0,36,0" />
+              <Label Text="{Binding UnreadItems, Converter={StaticResource UnreadCountConverter}}"
+                     IsVisible="{Binding HasUnread, Converter={StaticResource BoolAlphaConverter}}"
+                     FontSize="Micro" FontAttributes="Bold" BackgroundColor="{StaticResource UnreadBackgroundColor}"
+                     HorizontalTextAlignment="Center" TextColor="{StaticResource GitterForegroundColor}"
+                     VerticalTextAlignment="Center" HorizontalOptions="End" WidthRequest="30" Margin="6" />
             </Grid>
-          </ViewCell>
+          </views:SelectionViewCell>
         </DataTemplate>
       </ListView.ItemTemplate>
     </ListView>
-  </StackLayout>
+
+    <!-- footer -->
+
+    <Grid Padding="0" Margin="0" RowSpacing="0" ColumnSpacing="0" Grid.Row="2"
+          BackgroundColor="{StaticResource MainHeaderOverlayColor}">
+
+      <Button Text="My Rooms" Grid.Column="0" Command="{Binding MyRoomsCommand}" />
+      <Button Text="Search Gitter" Grid.Column="1" Command="{Binding SearchGitterCommand}" />
+
+      <Button Text="Settings" Grid.Column="2" />
+
+    </Grid>
+
+  </Grid>
+
 </ContentPage>

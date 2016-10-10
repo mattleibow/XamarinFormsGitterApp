@@ -2,7 +2,7 @@
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
-namespace GitterApp
+namespace GitterApp.Views
 {
 	[ContentProperty("Text")]
 	public class TranslateExtension : IMarkupExtension
@@ -16,7 +16,7 @@ namespace GitterApp
 				return string.Empty;
 			}
 
-			var translation = Resources.ResourceManager.GetString(Text);
+			var translation = AppResources.ResourceManager.GetString(Text);
 
 			if (translation == null)
 			{

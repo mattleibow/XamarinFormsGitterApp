@@ -7,6 +7,7 @@ using UIKit;
 using Newtonsoft.Json;
 using OpenId.AppAuth;
 
+using GitterApi.Models;
 using GitterApp.Services;
 
 namespace GitterApp.Platform.Services
@@ -17,14 +18,14 @@ namespace GitterApp.Platform.Services
 
 		public static IOIDAuthorizationFlowSession CurrentAuthFlow;
 
-		public override Task<GitterUser> GetLastUserAsync()
+		public override Task<User> GetLastUserAsync()
 		{
-			GitterUser user = null;
+			User user = null;
 
 			var json = GetLocalValue(LastUserKey);
 			if (json != null)
 			{
-				user = JsonConvert.DeserializeObject<GitterUser>(json);
+				user = JsonConvert.DeserializeObject<User>(json);
 			}
 
 			return Task.FromResult(user);
@@ -35,7 +36,7 @@ namespace GitterApp.Platform.Services
 			throw new NotImplementedException();
 		}
 
-		protected override Task SaveUser(GitterUser user)
+		protected override Task SaveUser(User user)
 		{
 			var json = JsonConvert.SerializeObject(user);
 			SetLocalValue(LastUserKey, json);
@@ -45,7 +46,7 @@ namespace GitterApp.Platform.Services
 			return Task.FromResult(true);
 		}
 
-		protected override Task<string> GetLocalToken()
+		public override Task<string> GetLastTokenAsync()
 		{
 			return Task.FromResult(GetLocalValue(SettingsUserNameKey));
 		}
@@ -100,7 +101,7 @@ namespace GitterApp.Platform.Services
 			var query = new SecRecord(SecKind.GenericPassword);
 			query.Service = SettingsResourceKey;
 			query.Account = key;
-			
+
 			SecStatusCode result;
 			var record = SecKeyChain.QueryAsRecord(query, out result);
 			if (result == SecStatusCode.Success && record != null)

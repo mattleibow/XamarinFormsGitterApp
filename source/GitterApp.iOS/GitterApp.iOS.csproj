@@ -98,6 +98,7 @@
     <ITunesArtwork Include="iTunesArtwork" />
     <ITunesArtwork Include="iTunesArtwork@2x" />
     <None Include="packages.config" />
+    <Compile Include="Renderers\SelectionViewCellRenderer.cs" />
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\Default-568h%402x.png" />
@@ -119,6 +120,9 @@
       <Link>Resources\Media\banner.jpg</Link>
     </BundleResource>
     <InterfaceDefinition Include="LaunchScreen.storyboard" />
+    <BundleResource Include="..\..\images\app-media\menu.jpg">
+      <Link>Resources\Media\menu.jpg</Link>
+    </BundleResource>
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=9.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
@@ -157,6 +161,10 @@
       <Project>{9E46309B-0CAA-4136-96B7-AB11D485FA3E}</Project>
       <Name>GitterApp</Name>
     </ProjectReference>
+    <ProjectReference Include="..\GitterApi\GitterApi.csproj">
+      <Project>{3F24E464-5F58-4C1D-BB61-9C64FFB10C73}</Project>
+      <Name>GitterApi</Name>
+    </ProjectReference>
   </ItemGroup>
   <ItemGroup>
     <BundleResource Include="Resources\hamburger.png" />
@@ -169,6 +177,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Resources\Media\" />
+    <Folder Include="Renderers\" />
   </ItemGroup>
   <Import Project="..\GitterApp.Localization\GitterApp.Localization.projitems" Label="Shared" />
   <Import Project="$(MSBuildExtensionsPath)\Xamarin\iOS\Xamarin.iOS.CSharp.targets" />

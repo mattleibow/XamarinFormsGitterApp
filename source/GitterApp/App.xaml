@@ -1,12 +1,26 @@
-﻿<?xml version="1.0" encoding="utf-8" ?>
+<?xml version="1.0" encoding="utf-8" ?>
 <Application xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:views="clr-namespace:GitterApp;assembly=GitterApp"
              x:Class="GitterApp.App">
   <Application.Resources>
 
     <ResourceDictionary>
+      <OnPlatform x:Key="MainHeaderHeight" x:TypeArguments="GridLength" WinPhone="88" iOS="64" Android="88" />
+      <Color x:Key="MainHeaderOverlayColor">#4C000000</Color>
+
       <Color x:Key="GitterBackgroundColor">#512e92</Color>
+      <Color x:Key="GitterForegroundColor">#FFFFFF</Color>
+      <Color x:Key="UnreadBackgroundColor">#46bc99</Color>
+      <Color x:Key="SelectedOverlayColor">#33FFFFFF</Color>
+			
       <OnPlatform x:Key="GitterBackgroundImage" x:TypeArguments="ImageSource" WinPhone="Media/banner.jpg" iOS="Media/banner.jpg" Android="banner.jpg" />
+      <OnPlatform x:Key="GitterMenuImage" x:TypeArguments="ImageSource" WinPhone="Media/menu.jpg" iOS="Media/menu.jpg" Android="menu.jpg" />
+
+      <views:RoomTypeConverter x:Key="RoomTypeConverter" />
+      <views:BoolAlphaConverter x:Key="BoolAlphaConverter" />
+      <views:BoolBoldConverter x:Key="BoolBoldConverter" />
+      <views:UnreadCountConverter x:Key="UnreadCountConverter" />
     </ResourceDictionary>
 
   </Application.Resources>

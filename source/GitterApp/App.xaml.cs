@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using Xamarin.Forms;
 
+using GitterApi.Models;
 using GitterApp.Services;
 
 namespace GitterApp
@@ -13,11 +14,12 @@ namespace GitterApp
 
 			MainPage = CurrentUser == null ? (Page)new LoginPage() : (Page)new MainPage();
 
-			MessagingCenter.Subscribe<App, GitterUser>(CurrentApp, Messages.LoggedIn, (sender, user) =>
+			MessagingCenter.Subscribe<App, LoginResult>(CurrentApp, Messages.LoggedIn, (sender, result) =>
 			{
-				CurrentUser = user;
+				CurrentToken = result.Token;
+				CurrentUser = result.User;
 
-				Debug.WriteLine($"Logged in: {user.DisplayName}.");
+				Debug.WriteLine($"Logged in: {CurrentUser.DisplayName}.");
 
 				if (!(MainPage is MainPage))
 				{
@@ -38,7 +40,9 @@ namespace GitterApp
 
 		public static App CurrentApp => (App)Current;
 
-		public GitterUser CurrentUser { get; private set; }
+		public string CurrentToken { get; private set; }
+
+		public User CurrentUser { get; private set; }
 
 		protected override async void OnStart()
 		{
@@ -46,10 +50,16 @@ namespace GitterApp
 
 			// get the last user
 			var service = DependencyService.Get<IGitterLoginService>();
+			var token = await service.GetLastTokenAsync();
 			var user = await service.GetLastUserAsync();
-			if (user != null)
+			if (token != null && user != null)
 			{
-				MessagingCenter.Send(CurrentApp, Messages.LoggedIn, user);
+				var result = new LoginResult
+				{
+					Token = token,
+					User = user
+				};
+				MessagingCenter.Send(CurrentApp, Messages.LoggedIn, result);
 			}
 		}
 
@@ -68,5 +78,7 @@ namespace GitterApp
 	{
 		public const string LoggedIn = "LoggedIn";
 		public const string LoggedOut = "LoggedOut";
+
+		public const string ToggleMenu = "ToggleMenu";
 	}
 }

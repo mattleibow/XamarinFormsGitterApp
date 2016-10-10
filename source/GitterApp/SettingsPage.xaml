@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<NavigationPage xmlns="http://xamarin.com/schemas/2014/forms" 
+                xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
+                xmlns:i18n="clr-namespace:GitterApp.Views;assembly=GitterApp"
+                x:Class="GitterApp.SettingsPage" Title="{i18n:Translate SettingsPageTitle}">
+  <Grid>
+    <Button Text="My Profile" Clicked="OnProfileClicked" />
+  </Grid>
+</NavigationPage>

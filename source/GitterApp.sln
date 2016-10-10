@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitterApp.Windows", "Gitter
 EndProject
 Project("{D954291E-2A0B-460D-934E-DC6B0785DB48}") = "GitterApp.Localization", "GitterApp.Localization\GitterApp.Localization.shproj", "{0BA6873F-A876-4044-8A90-27A39806CE4B}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GitterApi", "GitterApi\GitterApi.csproj", "{3F24E464-5F58-4C1D-BB61-9C64FFB10C73}"
+EndProject
 Global
 	GlobalSection(SharedMSBuildProjectFiles) = preSolution
 		GitterApp.Localization\GitterApp.Localization.projitems*{0ba6873f-a876-4044-8a90-27a39806ce4b}*SharedItemsImports = 13
@@ -211,8 +213,46 @@ Global
 		{0809C870-6976-4148-935D-2817ED5FAF40}.Release|x86.ActiveCfg = Release|x86
 		{0809C870-6976-4148-935D-2817ED5FAF40}.Release|x86.Build.0 = Release|x86
 		{0809C870-6976-4148-935D-2817ED5FAF40}.Release|x86.Deploy.0 = Release|x86
+		{3F24E464-5F58-4C1D-BB61-9C64FFB10C73}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3F24E464-5F58-4C1D-BB61-9C64FFB10C73}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3F24E464-5F58-4C1D-BB61-9C64FFB10C73}.Debug|ARM.ActiveCfg = Debug|Any CPU
+		{3F24E464-5F58-4C1D-BB61-9C64FFB10C73}.Debug|ARM.Build.0 = Debug|Any CPU
+		{3F24E464-5F58-4C1D-BB61-9C64FFB10C73}.Debug|iPhone.ActiveCfg = Debug|Any CPU
+		{3F24E464-5F58-4C1D-BB61-9C64FFB10C73}.Debug|iPhone.Build.0 = Debug|Any CPU
+		{3F24E464-5F58-4C1D-BB61-9C64FFB10C73}.Debug|iPhoneSimulator.ActiveCfg = Debug|Any CPU
+		{3F24E464-5F58-4C1D-BB61-9C64FFB10C73}.Debug|iPhoneSimulator.Build.0 = Debug|Any CPU
+		{3F24E464-5F58-4C1D-BB61-9C64FFB10C73}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{3F24E464-5F58-4C1D-BB61-9C64FFB10C73}.Debug|x64.Build.0 = Debug|Any CPU
+		{3F24E464-5F58-4C1D-BB61-9C64FFB10C73}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{3F24E464-5F58-4C1D-BB61-9C64FFB10C73}.Debug|x86.Build.0 = Debug|Any CPU
+		{3F24E464-5F58-4C1D-BB61-9C64FFB10C73}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3F24E464-5F58-4C1D-BB61-9C64FFB10C73}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3F24E464-5F58-4C1D-BB61-9C64FFB10C73}.Release|ARM.ActiveCfg = Release|Any CPU
+		{3F24E464-5F58-4C1D-BB61-9C64FFB10C73}.Release|ARM.Build.0 = Release|Any CPU
+		{3F24E464-5F58-4C1D-BB61-9C64FFB10C73}.Release|iPhone.ActiveCfg = Release|Any CPU
+		{3F24E464-5F58-4C1D-BB61-9C64FFB10C73}.Release|iPhone.Build.0 = Release|Any CPU
+		{3F24E464-5F58-4C1D-BB61-9C64FFB10C73}.Release|iPhoneSimulator.ActiveCfg = Release|Any CPU
+		{3F24E464-5F58-4C1D-BB61-9C64FFB10C73}.Release|iPhoneSimulator.Build.0 = Release|Any CPU
+		{3F24E464-5F58-4C1D-BB61-9C64FFB10C73}.Release|x64.ActiveCfg = Release|Any CPU
+		{3F24E464-5F58-4C1D-BB61-9C64FFB10C73}.Release|x64.Build.0 = Release|Any CPU
+		{3F24E464-5F58-4C1D-BB61-9C64FFB10C73}.Release|x86.ActiveCfg = Release|Any CPU
+		{3F24E464-5F58-4C1D-BB61-9C64FFB10C73}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(MonoDevelopProperties) = preSolution
+		Policies = $0
+		$0.TextStylePolicy = $1
+		$1.inheritsSet = VisualStudio
+		$1.scope = application/xml
+		$1.FileWidth = 120
+		$1.TabWidth = 2
+		$1.IndentWidth = 2
+		$1.inheritsScope = text/plain
+		$0.XmlFormattingPolicy = $2
+		$2.inheritsSet = Mono
+		$2.scope = application/xml
+		$2.inheritsScope = application/xml
 	EndGlobalSection
 EndGlobal

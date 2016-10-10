@@ -81,7 +81,7 @@ namespace GitterApp
 			}
 			else
 			{
-				MessagingCenter.Send(App.CurrentApp, Messages.LoggedIn, result.User);
+				MessagingCenter.Send(App.CurrentApp, Messages.LoggedIn, result);
 			}
 		}
 

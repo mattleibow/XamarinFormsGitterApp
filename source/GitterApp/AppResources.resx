@@ -126,4 +126,34 @@
   <data name="LogoNameText" xml:space="preserve">
     <value>G I T T E R</value>
   </data>
+  <data name="MenuGroupStarredUnreads" xml:space="preserve">
+    <value>STARRED UNREADS</value>
+  </data>
+  <data name="MenuGroupUnreads" xml:space="preserve">
+    <value>UNREADS</value>
+  </data>
+  <data name="MenuGroupStarred" xml:space="preserve">
+    <value>STARRED</value>
+  </data>
+  <data name="MenuGroupRooms" xml:space="preserve">
+    <value>ROOMS</value>
+  </data>
+  <data name="MenuGroupDirects" xml:space="preserve">
+    <value>DIRECT MESSAGES</value>
+  </data>
+  <data name="SettingsPageTitle" xml:space="preserve">
+    <value>Settings</value>
+  </data>
+  <data name="DoneButtonText" xml:space="preserve">
+    <value>Done</value>
+  </data>
+  <data name="MenuGroupSuggestions" xml:space="preserve">
+    <value>SUGGESTIONS</value>
+  </data>
+  <data name="MenuGroupNoResults" xml:space="preserve">
+    <value>NO RESULTS</value>
+  </data>
+  <data name="MenuGroupSearchResults" xml:space="preserve">
+    <value>NO RESULTS</value>
+  </data>
 </root>
